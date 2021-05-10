@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcMicroServicePOC.Protos";
+package equipo;
+
+service Equipo {
+  rpc EquipoInfo (EquipoRequest) returns (EquipoReply);
+  rpc GetAllTeams (EmptyRequest) returns (stream EquipoReply);
+}
+
+message EmptyRequest{}
+
+message EquipoRequest {
+  int32 id = 1;
+}
+
+message EquipoReply {
+  string nombre = 1;
+  int32 titulos = 2;
+  int32 descensos = 4;
+  bool esGrande = 5;
+  enum Ubicacion {
+		CAPITAL = 0;
+		BUENOS_AIRES = 1;
+		INTERIOR = 2;
+		ROSARIO = 3;
+		CORDOBA = 4;
+		OTRO = 5;
+  }
+  Ubicacion ubicacion = 6;
+}
